@@ -3,9 +3,11 @@ package com.example.controller
 import com.example.domain.Book
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
+import io.micronaut.retry.annotation.CircuitBreaker
 import io.reactivex.Flowable
 
 @Controller("/books")
+@CircuitBreaker(delay = "5s", attempts = "5", multiplier = "3", reset = "30s")
 class BookController {
 
     @Get

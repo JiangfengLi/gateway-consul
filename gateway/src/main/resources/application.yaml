@@ -13,6 +13,7 @@ spring:
       discovery:
         locator:
           enabled: true
+          lower-case-service-id: true
       routes:
         - id: service1
           uri: lb://service1
@@ -20,6 +21,13 @@ spring:
             - Path=/api/**
           filters:
             - RewritePath=/(?<path>.*), /$\{path}
+        - id: service2
+          uri: lb://service2
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/(?<path>.*), /$\{path}
+
 
 management:
   endpoint:
